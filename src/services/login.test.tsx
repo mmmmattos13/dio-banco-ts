@@ -2,11 +2,15 @@ import { login } from "./login"
 
 describe('login', () => {
 
-    const mockAlert = jest.fn();
-    window.alert = mockAlert
+    const mockEmail = 'matheus@dio.bank'
+    const mockSenha = '123456'
+    it('Deve exibir um alert com boas vindas caso o email seja válido', async() => {
+        const response = await login(mockEmail, mockSenha)
+        expect(response).toBeTruthy()
+    })
 
-    it('Deve exibir um alert com boas-vindas', () => {
-        login()
-        expect(mockAlert).toBeCalled()
+    it('Deve exibir um erro caso o email seja inválido', async() => {
+        const response = await login('email@invalido.com', 'teste')
+        expect(response).toBeFalsy()
     })
 })
